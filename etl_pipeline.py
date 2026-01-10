@@ -20,10 +20,10 @@ def load_and_merge_data(data_path='Daten'):
     for folder in daily_folders:
         try:
             # Load data from each CSV file
-            stammdaten_df = pd.read_csv(os.path.join(folder, '01_Stammdaten.csv'), sep=';', on_bad_lines='skip')
-            auftragsdaten_df = pd.read_csv(os.path.join(folder, '02_Auftragsdaten.csv'), sep=';', on_bad_lines='skip')
-            waage_df = pd.read_csv(os.path.join(folder, '03_Waage.csv'), sep=';', on_bad_lines='skip')
-            kippsignale_df = pd.read_csv(os.path.join(folder, '04_Kippsignale.csv'), sep=';', on_bad_lines='skip')
+            stammdaten_df = pd.read_csv(os.path.join(folder, '01_Stammdaten.csv'), sep=';', on_bad_lines='skip', low_memory=False)
+            auftragsdaten_df = pd.read_csv(os.path.join(folder, '02_Auftragsdaten.csv'), sep=';', on_bad_lines='skip', low_memory=False)
+            waage_df = pd.read_csv(os.path.join(folder, '03_Waage.csv'), sep=';', on_bad_lines='skip', low_memory=False)
+            kippsignale_df = pd.read_csv(os.path.join(folder, '04_Kippsignale.csv'), sep=';', on_bad_lines='skip', low_memory=False)
 
             # Merge the dataframes
             # 1. Merge auftragsdaten with waage on ORDERNR
@@ -31,6 +31,12 @@ def load_and_merge_data(data_path='Daten'):
 
             # 2. Merge the result with kippsignale on ORDERNR
             auftrag_waage_kipp_df = pd.merge(auftrag_waage_df, kippsignale_df, on='ORDERNR', how='inner', suffixes=('_auftrag', '_kipp'))
+            
+            # After the merge, pandas adds suffixes to columns with the same name.
+            # We need to restore the 'ROUTE' column for the next merge.
+            # We'll use the route from auftragsdaten as the source of truth.
+            if 'ROUTE_auftrag' in auftrag_waage_kipp_df.columns:
+                auftrag_waage_kipp_df['ROUTE'] = auftrag_waage_kipp_df['ROUTE_auftrag']
 
             # 3. Merge the result with stammdaten on ROUTE
             # To avoid issues with many-to-many joins, we'll drop duplicates from stammdaten based on ROUTE
@@ -53,7 +59,7 @@ def load_and_merge_data(data_path='Daten'):
 
     # Basic data cleaning
     final_df['NET_WEIGHT'] = pd.to_numeric(final_df['NET_WEIGHT'], errors='coerce')
-    final_df['GROSS_WDATE'] = pd.to_datetime(final_df['GROSS_WDATE'], format='%d.%m.%Y', errors='coerce')
+    final_df['GROSS_WDATE'] = pd.to_datetime(final_df['GROSS_WDATE'], format='%Y%m%d', errors='coerce')
 
 
     return final_df
@@ -72,7 +78,7 @@ def get_total_waste_weight_per_day(merged_df: pd.DataFrame):
         return "Required columns ('GROSS_WDATE', 'NET_WEIGHT') not found."
     
     daily_weight = merged_df.groupby('GROSS_WDATE')['NET_WEIGHT'].sum().reset_index()
-    daily_weight = daily_weight.rename(columns={'GROSSE_WDATE': 'Date', 'NET_WEIGHT': 'TotalWeight'})
+    daily_weight = daily_weight.rename(columns={'GROSS_WDATE': 'Date', 'NET_WEIGHT': 'TotalWeight'})
 
     return daily_weight
 
