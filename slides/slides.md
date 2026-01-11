@@ -145,14 +145,12 @@ Diese Faktoren führen unweigerlich zu langsamen Entwicklungszyklen und hohen Wa
 ```mermaid
 graph TD
     subgraph "Kontext-Komponenten"
-        A[Daten-Schema<br>(Agent.md)]
-        B[Benutzeranfrage<br>(user_prompt.txt)]
-        C[Anweisungen & Regeln]
+        A[Agent.md<br>(Schema + Prompt-Vorlage + Regeln)]
+        B[user_prompt.txt<br>(Benutzeranfrage)]
     end
 
     A --> D{Master-Prompt}
     B --> D
-    C --> D
 
     D --> E((LLM))
 
@@ -214,8 +212,7 @@ Dieser Ansatz kombiniert die Zuverlässigkeit einer traditionellen Architektur m
 ```mermaid
 graph TD
     A[Benutzer schreibt<br>user_prompt.txt] --> B{Master-Prompt<br>wird erstellt};
-    C[Agent.md<br>(Schema)] --> B;
-    D[prompt_template.txt] --> B;
+    C[Agent.md<br>(Schema + Prompt-Vorlage)] --> B;
     B --> E((LLM));
     E --> F[dynamic_transforms.py<br>wird aktualisiert];
     F --> G[main_pipeline.py<br>führt Transformation aus];
@@ -268,8 +265,7 @@ Und schließlich führt er das Hauptskript aus, das die gesamte Pipeline orchest
 ├── transforms/
 │   └── dynamic_transforms.py # DYNAMISCHE LOGIK
 ├── main_pipeline.py      # Orchestrator
-├── Agent.md              # Kontext: Datenschema
-├── prompt_template.txt   # Kontext: Vorlage
+├── Agent.md              # Kontext: Datenschema & Prompt-Vorlage
 └── user_prompt.txt       # Kontext: Benutzeranfrage
 ```
 
