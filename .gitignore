@@ -4,3 +4,4 @@ data/
 slides.html
 */__pycache__/
 *.pyc
+slides/slides.pdf
