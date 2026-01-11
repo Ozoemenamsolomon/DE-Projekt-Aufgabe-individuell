@@ -1,2 +1,6 @@
 Daten.zip
 Daten/
+data/
+slides.html
+*/__pycache__/
+*.pyc

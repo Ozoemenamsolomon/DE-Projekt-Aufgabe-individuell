@@ -1,0 +1,1 @@
+Filter the dataset to include only records where the `WASTE_TYPE_TXT` is 'Bioabfall FFM' and the net weight (`NET_WEIGHT`) is greater than 1000 KG.

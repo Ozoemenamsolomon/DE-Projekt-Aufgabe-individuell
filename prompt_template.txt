@@ -1,0 +1,71 @@
+# LLM Prompt for Dynamic ETL Transformation
+
+You are an expert Python data engineer. Your task is to generate a Python function and its documentation based on a user's request.
+
+**IMPORTANT RULES:**
+1.  You MUST generate a single Python function named `apply_transform`.
+2.  This function MUST accept a pandas DataFrame as its only argument and MUST return a transformed pandas DataFrame.
+3.  You MUST also generate a Markdown-formatted string variable named `TRANSFORM_DOCUMENTATION` that clearly explains the transformation logic.
+4.  The generated code should be self-contained within the `transforms/dynamic_transforms.py` file, requiring only `pandas`.
+5.  The function should operate on the `merged_data.csv` file, whose schema is described in detail below.
+
+---
+### **Data Schema (`merged_data.csv`)**
+(This context is derived from the `Agent.md` file)
+
+**File Description:** A merged CSV containing cleaned data from all raw sources. It represents the single source of truth for transformations.
+
+**Key Columns for Transformation:**
+
+| Column | Data Type | Description | Example |
+| :--- | :--- | :--- | :--- |
+| ORDERNR | string | Unique identifier for a collection order. | `00000000000002629397` |
+| ROUTE | string | Unique identifier for a collection route. | `EW1403` |
+| TIDNR | string | Unique identifier for a container (Tonne). | `12345678` |
+| NET_WEIGHT | float | The net weight of the collected waste in KG. | `10920.0` |
+| ENTSORGER | string | The disposal company. | `RMB` |
+| WASTE_TYPE_TXT | string | Text description of the waste type. | `gemischte Siedlungsabfälle`|
+| BEH_TYPE_TXT | string | Text description of the container type. | `1100L` |
+| STPL_STREET | string | Street name of the container's location. | `Musterstraße` |
+| STPL_CITY1 | string | City of the container's location. | `Frankfurt am Main` |
+| KIPPE | integer | A signal indicating a tipping event (likely 1). | `1` |
+| LONGITUDE | float | GPS longitude of the tipping event. | `8.682127` |
+| LATITUDE | float | GPS latitude of the tipping event. | `50.110924` |
+| EVENT_DATE | datetime64[ns] | The primary date for the event, coalesced from weighing and creation dates. | `2025-04-08` |
+| ... | | (Other columns from the source files) | |
+
+---
+### **User's Transformation Request:**
+
+```
+{user_prompt}
+```
+
+---
+### **Your Task:**
+
+Based on the data schema and the user's request above, generate the Python code for the `apply_transform` function and the `TRANSFORM_DOCUMENTATION` variable. Place your generated code inside the `transforms/dynamic_transforms.py` file, replacing the placeholder content.
+
+**Example Output Structure:**
+
+```python
+# --- Start of LLM-Generated Code ---
+
+import pandas as pd
+
+def apply_transform(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    (Your function description here)
+    """
+    # Your transformation logic here
+    
+    return df
+
+TRANSFORM_DOCUMENTATION = """
+## (Your Documentation Title)
+
+(Your Markdown-formatted documentation here)
+"""
+```
+
+Now, generate the code and documentation.
