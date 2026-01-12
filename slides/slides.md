@@ -3,7 +3,10 @@ marp: true
 lang: de
 title: LLMs zur Automatisierung von ETL-Pipelines und Dokumentation
 author: Solomon Obinna Ozoemenam
-date: 12. Januar 2026
+style: |
+  section {
+    font-size: 1.7em;
+  }
 transition: slide
 footer: Data Engineering Projektaufgabe |   12. Januar 2026
 paginate: true
@@ -22,10 +25,6 @@ Guten Tag zusammen. Mein Name ist [Ihr Name] und heute präsentiere ich mein Pro
 -->
 
 ---
-
-<style scoped>
-  section { font-size: 1.7em; }
-</style>
 
 ## **Agenda**
 
@@ -52,9 +51,9 @@ Hier ist ein Überblick über das, was wir heute besprechen werden. Wir beginnen
 
 ## **Zentrale Ergebnisse**
 
-- **Problem**: Traditionelle ETL-Prozesse sind langsam, manuell und schlecht dokumentiert.
-- **Lösung**: Dieses Projekt nutzt ein LLM, um aus einer einfachen Textanforderung automatisch sowohl den **Python-Code** für die Datentransformation als auch die zugehörige **Dokumentation** zu generieren.
-- **Ergebnis**: Ein agiles, "selbst-dokumentierendes" ETL-Framework, das den Entwicklungsaufwand erheblich reduziert und Fachexperten direkt einbindet.
+- **Problem**: Traditionelle ETL-Prozesse sind langsam, manuell und schlecht dokumentiert.<sup><a href="#ref-1">[1]</a></sup>
+- **Lösung**: Dieses Projekt nutzt ein LLM, um aus einer einfachen Textanforderung automatisch sowohl den **Python-Code** für die Datentransformation als auch die zugehörige **Dokumentation** zu generieren.<sup><a href="#ref-2">[2]</a></sup>
+- **Ergebnis**: Ein agiles, "selbst-dokumentierendes" ETL-Framework, das den Entwicklungsaufwand erheblich reduziert und Fachexperten direkt einbindet.<sup><a href="#ref-3">[3]</a></sup>
 
 ```mermaid
 graph LR
@@ -85,11 +84,11 @@ Das Ergebnis ist eine extrem agile, sich selbst dokumentierende Pipeline, die de
   - **Extract**: Daten aus Quellen extrahieren.
   - **Transform**: Daten bereinigen, anreichern, umwandeln.
   - **Load**: Daten in ein Zielsystem (z.B. Data Warehouse) laden.
-  - _Traditionell ein starrer, manueller Prozess._
+  - _Traditionell ein starrer, manueller Prozess._<sup><a href="#ref-4">[4]</a></sup>
 
 - **LLM (Large Language Model)**:
   - Ein KI-Modell, das trainiert wurde, menschliche Sprache zu verstehen und zu generieren.
-  - Kann Aufgaben wie Übersetzung, Zusammenfassung und **Code-Generierung** ausführen.
+  - Kann Aufgaben wie Übersetzung, Zusammenfassung und **Code-Generierung** ausführen.<sup><a href="#ref-5">[5]</a></sup>
 
 <!--
 Kurz zu den Grundlagen: ETL ist der klassische Prozess, um Daten von A nach B zu bekommen, wobei der Transformationsschritt oft sehr aufwändig ist. LLMs sind KI-Modelle, die Text verstehen und erzeugen können. In unserem Fall nutzen wir sie als eine Art "programmierenden Assistenten".
@@ -99,9 +98,9 @@ Kurz zu den Grundlagen: ETL ist der klassische Prozess, um Daten von A nach B zu
 
 ## **Motivation: Warum ist dieses Thema relevant?**
 
-- **"Demokratisierung" der Daten**: Fachanwender ohne tiefe Programmierkenntnisse können komplexe Analysen selbst anstoßen.
-- **Agilität & Geschwindigkeit**: Deutlich schnellere Iterationszyklen im Vergleich zu traditionellen, ticket-basierten Entwicklungsprozessen.
-- **"Lebende" Dokumentation**: Die automatisch generierte Dokumentation dient als Wissensdatenbank, verhindert Wissenssilos und ist immer aktuell.
+- **"Demokratisierung" der Daten**: Fachanwender ohne tiefe Programmierkenntnisse können komplexe Analysen selbst anstoßen.<sup><a href="#ref-6">[6]</a></sup>
+- **Agilität & Geschwindigkeit**: Deutlich schnellere Iterationszyklen im Vergleich zu traditionellen, ticket-basierten Entwicklungsprozessen.<sup><a href="#ref-7">[7]</a></sup>
+- **"Lebende" Dokumentation**: Die automatisch generierte Dokumentation dient als Wissensdatenbank, verhindert Wissenssilos und ist immer aktuell.<sup><a href="#ref-8">[8]</a></sup>
 
 ```mermaid
 graph TD
@@ -125,7 +124,7 @@ Und drittens schaffen wir eine "lebende" Dokumentation. Da Code und Doku zusamme
 
 - Hoher manueller Aufwand
 - Veraltete oder fehlende Dokumentation
-- Langsame Entwicklungszyklen & hohe Wartungskosten
+- Langsame Entwicklungszyklen & hohe Wartungskosten<sup><a href="#ref-9">[9]</a></sup>
 
 ---
 
@@ -154,8 +153,8 @@ Diese Faktoren führen unweigerlich zu langsamen Entwicklungszyklen und hohen Wa
 
 ## **Die Lösung: LLM, Kontext & Prompt**
 
-- **LLM als "Übersetzer"**: Wandelt Anforderung in Code & Doku um.
-- **Kontext vs. Prompt**: Eine wichtige Unterscheidung.
+- **LLM als "Übersetzer"**: Wandelt Anforderung in Code & Doku um.<sup><a href="#ref-10">[10]</a></sup>
+- **Kontext vs. Prompt**: Eine wichtige Unterscheidung.<sup><a href="#ref-11">[11]</a></sup>
   - **Kontext**: Die statische "DNA" des Projekts. Eine einmalige Einrichtung, die Daten-Schemata, Regeln und Ausgabeformate definiert (`Agent.md`).
   - **User Prompt**: Die dynamische Benutzeranfrage. Ändert sich mit jeder neuen Anforderung (`user_prompt.txt`).
 
@@ -185,8 +184,9 @@ Nur mit diesem gebündelten Befehl kann das LLM präzise und nützliche Ergebnis
 ## **Ein neues Paradigma: Dynamische Transformationen**
 
 - **Statische ETL (Extrahieren & Laden)**: Robuste, unveränderliche Basis.
+  - _Derzeit begrenzt auf CSV-Dateien für Projektspezifikationen, um Komplexität zu reduzieren._
 - **Dynamischer "Transformieren"-Schritt**: Flexible, bei Bedarf vom LLM generierte Logik.
-- Kombiniert **Zuverlässigkeit** mit **Flexibilität**.
+- Kombiniert **Zuverlässigkeit** mit **Flexibilität**.<sup><a href="#ref-12">[12]</a></sup>
 
 ---
 
@@ -342,9 +342,9 @@ Wenn die Pipeline läuft, wird genau dieser Code ausgeführt, um das Endergebnis
 
 ### **Limitationen & Risiken**:
 
-- **Korrektheit**: Generierter Code erfordert Überprüfung ("Human-in-the-Loop").
-- **Prompt Engineering**: Ergebnisqualität hängt stark von der Prompt-Qualität ab.
-- **Sicherheit**: Vorsicht beim Senden sensibler Schemainformationen an externe LLM-APIs.
+- **Korrektheit**: Generierter Code erfordert Überprüfung ("Human-in-the-Loop").<sup><a href="#ref-13">[13]</a></sup>
+- **Prompt Engineering**: Ergebnisqualität hängt stark von der Prompt-Qualität ab.<sup><a href="#ref-14">[14]</a></sup>
+- **Sicherheit**: Vorsicht beim Senden sensibler Schemainformationen an externe LLM-APIs.<sup><a href="#ref-15">[15]</a></sup>
 
 ---
 
@@ -369,6 +369,28 @@ Es ist jedoch wichtig, auch die Limitationen zu erwähnen. Der generierte Code i
 <!--
 Die nächsten Schritte wären, den Prozess vollständig zu automatisieren, die Pipeline durch dynamische Extract- und Load-Schritte für verschiedene Datenformate zu erweitern und eventuell eine einfache Benutzeroberfläche zu entwickeln, um die Bedienung noch weiter zu vereinfachen.
 -->
+
+---
+
+<!-- _class: default -->
+
+# Referenzen
+
+<p id="ref-1"><b>[1]</b> <a href="https://scholar.google.com/scholar?q=traditional+ETL+challenges%2C+data+pipeline+maintenance%2C+technical+debt+data+warehousing">traditional ETL challenges, data pipeline maintenance, technical debt data warehousing</a></p>
+<p id="ref-2"><b>[2]</b> <a href="https://scholar.google.com/scholar?q=LLM+for+code+generation%2C+natural+language+to+code%2C+automatic+documentation">LLM for code generation%2C natural language to code%2C automatic documentation</a></p>
+<p id="ref-3"><b>[3]</b> <a href="https://scholar.google.com/scholar?q=data+democratization%2C+self-service+analytics%2C+agile+data+engineering">data democratization%2C self-service analytics%2C agile data engineering</a></p>
+<p id="ref-4"><b>[4]</b> <a href="https://scholar.google.com/scholar?q=ETL+fundamentals%2C+data+warehousing%2C+Ralph+Kimball%2C+Bill+Inmon">ETL fundamentals%2C data warehousing%2C Ralph Kimball%2C Bill Inmon</a></p>
+<p id="ref-5"><b>[5]</b> <a href="https://scholar.google.com/scholar?q=large+language+models+survey%2C+attention+is+all+you+need%2C+code+generation+LLM">large language models survey%2C attention is all you need%2C code generation LLM</a></p>
+<p id="ref-6"><b>[6]</b> <a href="https://scholar.google.com/scholar?q=data+democratization%2C+self-service+analytics%2C+citizen+data+scientist">data democratization%2C self-service analytics%2C citizen data scientist</a></p>
+<p id="ref-7"><b>[7]</b> <a href="https://scholar.google.com/scholar?q=agile+data+warehousing%2C+agile+ETL+development">agile data warehousing%2C agile ETL development</a></p>
+<p id="ref-8"><b>[8]</b> <a href="https://scholar.google.com/scholar?q=living+documentation%2C+documentation+as+code">living documentation%2C documentation as code</a></p>
+<p id="ref-9"><b>[9]</b> <a href="https://scholar.google.com/scholar?q=challenges+of+traditional+ETL%2C+ETL+technical+debt%2C+data+pipeline+maintenance+costs">challenges of traditional ETL%2C ETL technical debt%2C data pipeline maintenance costs</a></p>
+<p id="ref-10"><b>[10]</b> <a href="https://scholar.google.com/scholar?q=program+synthesis+with+large+language+models%2C+natural+language+to+code">program synthesis with large language models%2C natural language to code</a></p>
+<p id="ref-11"><b>[11]</b> <a href="https://scholar.google.com/scholar?q=prompt+engineering%2C+in-context+learning+large+language+models">prompt engineering%2C in-context+learning large language models</a></p>
+<p id="ref-12"><b>[12]</b> <a href="https://scholar.google.com/scholar?q=hybrid+data+architecture%2C+dynamic+data+pipelines%2C+configurable+etl">hybrid data architecture%2C dynamic data pipelines%2C configurable etl</a></p>
+<p id="ref-13"><b>[13]</b> <a href="https://scholar.google.com/scholar?q=correctness+of+LLM-generated+code%2C+human+in+the+loop+code+generation">correctness of LLM-generated code%2C human in the loop code generation</a></p>
+<p id="ref-14"><b>[14]</b> <a href="https://scholar.google.com/scholar?q=prompt+engineering+survey%2C+impact+of+prompt+design+on+LLM+performance">prompt engineering survey%2C impact of prompt design on LLM performance</a></p>
+<p id="ref-15"><b>[15]</b> <a href="https://scholar.google.com/scholar?q=security+and+privacy+of+large+language+models%2C+data+leakage+LLM+APIs">security and privacy of large language models%2C data leakage LLM APIs</a></p>
 
 ---
 
