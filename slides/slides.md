@@ -204,9 +204,11 @@ graph LR
 
 <!--
 Dies führt uns zu einem neuen ETL-Paradigma.
-Wir behalten die statischen, robusten Teile der Pipeline bei – das Extrahieren der Rohdaten und das Laden der Zieldaten.
-Der entscheidende Unterschied ist der "Transformieren"-Schritt. Dieser wird zu einer dynamischen, austauschbaren Komponente, deren Logik bei Bedarf von einem LLM generiert wird.
-Dieser Ansatz kombiniert die Zuverlässigkeit einer traditionellen Architektur mit der unglaublichen Flexibilität, die LLMs bieten.
+Wir behalten die statischen, robusten Teile der Pipeline bei – das Extrahieren und Laden.
+
+Warum sind diese statisch? Für dieses Projekt wurde mit spezifischen CSV-Dateien gearbeitet. Um die Lösung nicht unnötig zu verkomplizieren, wurden Extraktion und Laden auf diesen Anwendungsfall zugeschnitten.
+
+Der entscheidende Unterschied ist der "Transformieren"-Schritt. Dieser wird zu einer dynamischen Komponente, deren Logik bei Bedarf vom LLM generiert wird. Dieser Ansatz kombiniert die Zuverlässigkeit einer traditionellen Architektur mit der unglaublichen Flexibilität, die LLMs bieten.
 -->
 
 ---
@@ -359,13 +361,13 @@ Es ist jedoch wichtig, auch die Limitationen zu erwähnen. Der generierte Code i
 ## **Ausblick**
 
 - **Vollständige Automatisierung**: Direkter LLM-API-Aufruf in das Pipeline-Skript integrieren.
+- **Dynamisches E & L**: Den `Extract`- und `Load`-Schritt flexibler gestalten, um z.B. SQL-Datenbanken oder JSON-Dateien zu unterstützen.
 - **UI-Integration**: Eine einfache Benutzeroberfläche (z.B. mit Streamlit) für eine benutzerfreundlichere Erfahrung entwickeln.
-- **Breitere Unterstützung**: Mehr Datenquellen, Ziele und Transformationsbibliotheken unterstützen.
 
 ![Abstrakte Darstellung einer KI, die Datenflüsse automatisiert, Symbol für Effizienz und Innovation.](conclusion_future.png)
 
 <!--
-Die nächsten Schritte wären, den Prozess durch eine direkte API-Anbindung an ein LLM vollständig zu automatisieren und eventuell eine einfache Benutzeroberfläche zu entwickeln, um die Bedienung noch weiter zu vereinfachen.
+Die nächsten Schritte wären, den Prozess vollständig zu automatisieren, die Pipeline durch dynamische Extract- und Load-Schritte für verschiedene Datenformate zu erweitern und eventuell eine einfache Benutzeroberfläche zu entwickeln, um die Bedienung noch weiter zu vereinfachen.
 -->
 
 ---
