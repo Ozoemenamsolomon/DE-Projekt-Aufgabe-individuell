@@ -29,11 +29,11 @@ Guten Tag zusammen. Mein Name ist [Ihr Name] und heute präsentiere ich mein Pro
 
 ## **Agenda**
 
-- **Zentrale Ergebnisse (Executive Summary)**
+- **Zentrale Ergebnisse**
 
 - **Theoretische Grundlagen**
 
-  - Motivation: Warum jetzt?
+  - Grundlagen: Was sind ETL & LLMs?
   - Die Herausforderung traditioneller ETL
   - Die LLM-gestützte Lösung & die Bedeutung des Kontexts
   - Ein neues Paradigma: Dynamische Transformationen
@@ -50,7 +50,7 @@ Hier ist ein Überblick über das, was wir heute besprechen werden. Wir beginnen
 
 ---
 
-## **Zentrale Ergebnisse (Executive Summary)**
+## **Zentrale Ergebnisse**
 
 - **Problem**: Traditionelle ETL-Prozesse sind langsam, manuell und schlecht dokumentiert.
 - **Lösung**: Dieses Projekt nutzt ein LLM, um aus einer einfachen Textanforderung automatisch sowohl den **Python-Code** für die Datentransformation als auch die zugehörige **Dokumentation** zu generieren.
@@ -75,6 +75,25 @@ Das Ergebnis ist eine extrem agile, sich selbst dokumentierende Pipeline, die de
 <!-- _class: default -->
 
 # **Teil 1: Theoretische Grundlagen**
+
+---
+
+## **Grundlagen: Was sind ETL & LLMs?**
+
+- **ETL (Extract, Transform, Load)**:
+
+  - **Extract**: Daten aus Quellen extrahieren.
+  - **Transform**: Daten bereinigen, anreichern, umwandeln.
+  - **Load**: Daten in ein Zielsystem (z.B. Data Warehouse) laden.
+  - _Traditionell ein starrer, manueller Prozess._
+
+- **LLM (Large Language Model)**:
+  - Ein KI-Modell, das trainiert wurde, menschliche Sprache zu verstehen und zu generieren.
+  - Kann Aufgaben wie Übersetzung, Zusammenfassung und **Code-Generierung** ausführen.
+
+<!--
+Kurz zu den Grundlagen: ETL ist der klassische Prozess, um Daten von A nach B zu bekommen, wobei der Transformationsschritt oft sehr aufwändig ist. LLMs sind KI-Modelle, die Text verstehen und erzeugen können. In unserem Fall nutzen wir sie als eine Art "programmierenden Assistenten".
+-->
 
 ---
 
@@ -108,6 +127,8 @@ Und drittens schaffen wir eine "lebende" Dokumentation. Da Code und Doku zusamme
 - Veraltete oder fehlende Dokumentation
 - Langsame Entwicklungszyklen & hohe Wartungskosten
 
+---
+
 ```mermaid
 graph TD
     subgraph "Manuelle Prozesse"
@@ -131,28 +152,23 @@ Diese Faktoren führen unweigerlich zu langsamen Entwicklungszyklen und hohen Wa
 
 ---
 
-## **Die Lösung & die Bedeutung des Kontexts**
+## **Die Lösung: LLM, Kontext & Prompt**
 
 - **LLM als "Übersetzer"**: Wandelt Anforderung in Code & Doku um.
-- **Kontext ist der Schlüssel**: "Garbage in, garbage out."
-- **Master-Prompt**: Bündelt allen nötigen Kontext für das LLM.
-  - **Daten-Schema**: Was sind die Daten?
-  - **Anweisungen**: Wie soll die Ausgabe aussehen?
-  - **Benutzeranfrage**: Was soll getan werden?
+- **Kontext vs. Prompt**: Eine wichtige Unterscheidung.
+  - **Kontext**: Die statische "DNA" des Projekts. Eine einmalige Einrichtung, die Daten-Schemata, Regeln und Ausgabeformate definiert (`Agent.md`).
+  - **User Prompt**: Die dynamische Benutzeranfrage. Ändert sich mit jeder neuen Anforderung (`user_prompt.txt`).
 
 ---
 
 ```mermaid
 graph TD
-    subgraph "Kontext-Komponenten"
-        A[Agent.md<br>(Schema + Prompt-Vorlage + Regeln)]
-        B[user_prompt.txt<br>(Benutzeranfrage)]
-    end
+    graph TD
+    A["Kontext<br>(Agent.md)"]
+    B["User Prompt<br>(user_prompt.txt)"]
 
-    A --> D{Master-Prompt}
-    B --> D
-
-    D --> E((LLM))
+    A --> E
+    B --> E{LLM}
 
     E --> F[Generierter Code &<br>Dokumentation]
 ```
@@ -160,11 +176,8 @@ graph TD
 <!--
 Die Lösung liegt darin, ein LLM als intelligenten Übersetzer einzusetzen. Aber ein LLM ist kein Magier. Die Qualität des Ergebnisses hängt direkt von der Qualität des Inputs ab. Hier gilt das Prinzip: "Garbage in, garbage out."
 
-Der Schlüssel zum Erfolg ist daher, dem LLM den richtigen Kontext zu geben. In diesem Projekt besteht der Kontext aus drei Säulen, die zu einem "Master-Prompt" zusammengefügt werden:
-Erstens, ein detailliertes Daten-Schema, das dem LLM sagt, wie die Daten aussehen.
-Zweitens, klare Anweisungen, wie es seine Ausgabe formatieren soll.
-Und drittens, die eigentliche Benutzeranfrage.
-Nur mit diesem gebündelten Kontext kann das LLM präzise und nützliche Ergebnisse liefern.
+Der Schlüssel zum Erfolg ist die Kombination aus einem stabilen Kontext (der die "Spielregeln" festlegt) und einem flexiblen Prompt (der die "Aufgabe" beschreibt).
+Nur mit diesem gebündelten Befehl kann das LLM präzise und nützliche Ergebnisse liefern.
 -->
 
 ---
@@ -209,6 +222,8 @@ Dieser Ansatz kombiniert die Zuverlässigkeit einer traditionellen Architektur m
 - **Ziel**: Eine ETL-Pipeline mit dynamisch generierter Transformationslogik.
 - **Technologie**: Python & pandas.
 
+---
+
 ```mermaid
 graph TD
     A[Benutzer schreibt<br>user_prompt.txt] --> B{Master-Prompt<br>wird erstellt};
@@ -234,6 +249,8 @@ Die gesamte Umsetzung erfolgte in Python, wobei die `pandas`-Bibliothek das Herz
 2.  **Code generieren** (mit LLM)
 3.  **Skript aktualisieren** (`dynamic_transforms.py`)
 4.  **Pipeline ausführen** (`main_pipeline.py`)
+
+---
 
 ![Grafik, die den 4-Schritte-Workflow darstellt: Prompt schreiben, Code generieren, Skript aktualisieren, Pipeline ausführen.](4-step-process.png)
 
@@ -327,6 +344,8 @@ Wenn die Pipeline läuft, wird genau dieser Code ausgeführt, um das Endergebnis
 - **Prompt Engineering**: Ergebnisqualität hängt stark von der Prompt-Qualität ab.
 - **Sicherheit**: Vorsicht beim Senden sensibler Schemainformationen an externe LLM-APIs.
 
+---
+
 ![Warnschild-Grafik mit Symbolen für Code-Bugs, Sicherheitsschlösser und inkonsistente Ergebnisse, um Risiken darzustellen.](limitations_risks.png)
 
 <!--
@@ -356,5 +375,3 @@ Die nächsten Schritte wären, den Prozess durch eine direkte API-Anbindung an e
 # **Vielen Dank!**
 
 ## Fragen?
-
-<!-- ![Ein Dankeschön-Grafik mit einem Fragezeichen, das zum Stellen von Fragen einlädt.](thank_you_qa.png) -->
