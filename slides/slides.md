@@ -5,7 +5,7 @@ title: LLMs zur Automatisierung von ETL-Pipelines und Dokumentation
 author: Solomon Obinna Ozoemenam
 style: |
   section {
-    font-size: 1.3em;
+    font-size: 1.5em;
   }
 transition: slide
 footer: Data Engineering Projektaufgabe |   12. Januar 2026
@@ -21,7 +21,7 @@ class:
 _12. Januar 2026_
 
 <!--
-Guten Tag zusammen. Mein Name ist [Ihr Name] und heute präsentiere ich mein Projekt zum Thema "LLMs zur Automatisierung von ETL-Pipelines und Dokumentation".
+Guten Tag zusammen. Mein Name ist Solomon Obinna Ozoemenam und heute präsentiere ich mein Projekt zum Thema "LLMs zur Automatisierung von ETL-Pipelines und Dokumentation".
 -->
 
 ---
@@ -38,7 +38,7 @@ Guten Tag zusammen. Mein Name ist [Ihr Name] und heute präsentiere ich mein Pro
   - Ein neues Paradigma: Dynamische Transformationen
 
 - **Projekteinführung & Workflow**
-  - Projektübersicht & Ziele
+  - Projektübersicht & Architektur
   - Der 4-Schritte-Workflow
   - Code-Architektur & Demonstration
   - Fazit, Limitationen & Ausblick
@@ -53,15 +53,15 @@ Hier ist ein Überblick über das, was wir heute besprechen werden. Wir beginnen
 
 ## **Zentrale Ergebnisse**
 
-- **Problem**: Traditionelle ETL-Prozesse sind langsam, manuell und schlecht dokumentiert.<sup><a href="#ref-1">[1]</a></sup>
-- **Lösung**: Dieses Projekt nutzt ein LLM, um aus einer einfachen Textanforderung automatisch sowohl den **Python-Code** für die Datentransformation als auch die zugehörige **Dokumentation** zu generieren.<sup><a href="#ref-2">[2]</a></sup>
-- **Ergebnis**: Ein agiles, "selbst-dokumentierendes" ETL-Framework, das den Entwicklungsaufwand erheblich reduziert und Fachexperten direkt einbindet.<sup><a href="#ref-3">[3]</a></sup>
+- **Problem**: Traditionelle ETL-Prozesse sind starr und langsam.<sup><a href="#ref-1">[1]</a></sup>
+- **Lösung**: LLM-generierter **Python-Code** und **Dokumentation** aus Textanforderungen.<sup><a href="#ref-2">[2]</a></sup>
+- **Ergebnis**: Ein agiles, "selbst-dokumentierendes" ETL-Framework.</sup>
 
 <!--
-Bevor wir ins Detail gehen, hier die Kernaussage meines Projekts:
-Das Hauptproblem traditioneller Datenprozesse ist, dass sie langsam und schlecht dokumentiert sind.
-Meine Lösung ist ein Framework, das ein großes Sprachmodell nutzt, um aus einer einfachen Textanfrage automatisch sowohl den Code als auch die Dokumentation zu generieren.
-Das Ergebnis ist eine extrem agile, sich selbst dokumentierende Pipeline, die den manuellen Aufwand drastisch senkt und Fachexperten befähigt, direkt mit den Daten zu arbeiten.
+Bevor wir ins Detail gehen, hier die Kernaussage meines Projekts.
+Das Hauptproblem traditioneller Datenprozesse (ETL) ist, dass sie langsam, manuell und oft schlecht dokumentiert sind. Dies führt zu langen Entwicklungszyklen und hohen Wartungskosten.
+Meine Lösung ist ein Framework, das ein großes Sprachmodell (LLM) nutzt, um aus einer einfachen, natürlichsprachigen Textanfrage automatisch sowohl den Python-Code für die Datentransformation als auch die zugehörige technische Dokumentation zu generieren.
+Das Ergebnis ist eine extrem agile, sich selbst dokumentierende Pipeline. Diese reduziert den manuellen Aufwand drastisch und befähigt Fachexperten, die keine Programmierer sind, direkt mit den Daten zu arbeiten und komplexe Analysen anzustoßen.
 -->
 
 ---
@@ -74,19 +74,18 @@ Das Ergebnis ist eine extrem agile, sich selbst dokumentierende Pipeline, die de
 
 ## **Grundlagen: Was sind ETL & LLMs?**
 
-- **ETL (Extract, Transform, Load)**:
-
-  - **Extract**: Daten aus Quellen extrahieren.
-  - **Transform**: Daten bereinigen, anreichern, umwandeln.
-  - **Load**: Daten in ein Zielsystem (z.B. Data Warehouse) laden.
-  - _Traditionell ein starrer, manueller Prozess._<sup><a href="#ref-4">[4]</a></sup>
-
-- **LLM (Large Language Model)**:
-  - Ein KI-Modell, das trainiert wurde, menschliche Sprache zu verstehen und zu generieren.
-  - Kann Aufgaben wie Übersetzung, Zusammenfassung und **Code-Generierung** ausführen.<sup><a href="#ref-5">[5]</a></sup>
+- **ETL**: Extract, Transform, Load – der klassische Datenprozess.<sup><a href="#ref-4">[4]</a></sup>
+  - **Extract**: Daten aus Quellen holen.
+  - **Transform**: Daten bereinigen & umwandeln.
+  - **Load**: Daten in Zielsystem laden.
+- **LLM**: Large Language Model – eine KI für Sprache.<sup><a href="#ref-5">[5]</a></sup>
+  - Versteht und generiert menschlichen Text.
+  - Kernkompetenz hier: **Code-Generierung**.
 
 <!--
-Kurz zu den Grundlagen: ETL ist der klassische Prozess, um Daten von A nach B zu bekommen, wobei der Transformationsschritt oft sehr aufwändig ist. LLMs sind KI-Modelle, die Text verstehen und erzeugen können. In unserem Fall nutzen wir sie als eine Art "programmierenden Assistenten".
+Kurz zu den Grundlagen, um alle auf den gleichen Stand zu bringen.
+ETL steht für Extract, Transform, Load. Das ist der fundamentale Prozess in der Datenverarbeitung, um Daten aus verschiedenen Quellen zu holen, sie in das gewünschte Format zu bringen und sie dann in ein Zielsystem, wie ein Data Warehouse, zu laden. Der Transformationsschritt ist dabei traditionell der aufwändigste und unflexibelste Teil.
+LLMs, oder Large Language Models, sind hochentwickelte KI-Modelle. Sie werden auf riesigen Mengen an Textdaten trainiert, um menschliche Sprache zu verstehen und selbst zu generieren. Für unser Projekt ist ihre Fähigkeit, aus einer Beschreibung lauffähigen Programmcode zu erstellen, von entscheidender Bedeutung. Wir nutzen das LLM also als eine Art "programmierenden Assistenten".
 -->
 
 ---
@@ -95,15 +94,15 @@ Kurz zu den Grundlagen: ETL ist der klassische Prozess, um Daten von A nach B zu
 
 ## **Motivation: Warum ist dieses Thema relevant?**
 
-- **"Demokratisierung" der Daten**: Fachanwender ohne tiefe Programmierkenntnisse können komplexe Analysen selbst anstoßen.<sup><a href="#ref-6">[6]</a></sup>
-- **Agilität & Geschwindigkeit**: Deutlich schnellere Iterationszyklen im Vergleich zu traditionellen, ticket-basierten Entwicklungsprozessen.<sup><a href="#ref-7">[7]</a></sup>
-- **"Lebende" Dokumentation**: Die automatisch generierte Dokumentation dient als Wissensdatenbank, verhindert Wissenssilos und ist immer aktuell.<sup><a href="#ref-8">[8]</a></sup>
+- **Demokratisierung der Daten**: Fachanwender können Analysen selbst anstoßen.<sup><a href="#ref-6">[6]</a></sup>
+- **Agilität & Geschwindigkeit**: Schnellere Iterationszyklen als bei traditioneller Entwicklung.<sup><a href="#ref-7">[7]</a></sup>
+- **"Lebende" Dokumentation**: Code und Doku werden zusammen generiert und sind immer aktuell.<sup><a href="#ref-8">[8]</a></sup>
 
 <!--
-Warum ist dieses Thema gerade jetzt so relevant? Es gibt drei Haupttreiber.
-Erstens die "Demokratisierung" der Daten. Durch die Übersetzung von natürlicher Sprache zu Code können Fachanwender, die die Daten am besten kennen, selbst komplexe Transformationen anstoßen, ohne auf Entwicklerressourcen warten zu müssen.
-Zweitens führt dies zu einer enormen Steigerung der Agilität. Statt wochenlanger Zyklen für die Umsetzung können neue Anforderungen in Stunden oder Minuten realisiert werden.
-Und drittens schaffen wir eine "lebende" Dokumentation. Da Code und Doku zusammen generiert werden, gehört das Problem veralteter Dokumentationen der Vergangenheit an.
+Warum ist dieses Thema gerade jetzt so relevant? Es gibt drei Haupttreiber, die dieses Projekt motivieren.
+Erstens die "Demokratisierung" der Daten. Wir ermöglichen Fachanwendern – also den Menschen, die die Daten und den Geschäftskontext am besten verstehen – komplexe Datentransformationen selbst anzustoßen, ohne dafür Code schreiben zu müssen. Das baut Hürden ab und verlagert die Macht zu den Experten.
+Zweitens führt dies zu einer enormen Steigerung der Agilität. Traditionelle Prozesse, bei denen ein Fachexperte ein Ticket für einen Entwickler schreibt, sind langsam. Mit diesem Ansatz können neue Anforderungen statt in Wochen in Stunden oder sogar Minuten umgesetzt werden.
+Und drittens schaffen wir eine "lebende" Dokumentation. Ein notorisches Problem in der IT ist veraltete Dokumentation. Da hier Code und Dokumentation gemeinsam aus derselben Quelle generiert werden, ist die Doku per Definition immer aktuell und konsistent. Das verhindert Wissenssilos und erleichtert die Wartung.
 -->
 
 ---
@@ -117,10 +116,10 @@ Und drittens schaffen wir eine "lebende" Dokumentation. Da Code und Doku zusamme
 - Langsame Entwicklungszyklen & hohe Wartungskosten<sup><a href="#ref-9">[9]</a></sup>
 
 <!--
-Beginnen wir mit dem Kernproblem. ETL ist ein fundamentaler Prozess, aber traditionell mit erheblichen Herausforderungen verbunden.
-Der manuelle Aufwand für das Schreiben und Anpassen von Transformationslogik ist enorm.
-Ein noch größeres Problem ist oft die Dokumentation. Sie wird häufig vernachlässigt, ist veraltet oder inkonsistent.
-Diese Faktoren führen unweigerlich zu langsamen Entwicklungszyklen und hohen Wartungskosten.
+Beginnen wir mit dem Kernproblem, das dieses Projekt adressiert. ETL ist ein fundamentaler Prozess in jedem datengetriebenen Unternehmen, aber die traditionelle Herangehensweise ist mit erheblichen Herausforderungen verbunden.
+Der manuelle Aufwand für das Programmieren, Testen und Anpassen von Transformationslogik ist immens. Jede noch so kleine Änderung an einer Geschäftsanforderung kann einen aufwändigen Entwicklungs- und Freigabeprozess nach sich ziehen.
+Ein noch größeres, schleichendes Problem ist die Dokumentation. Sie wird im Projektalltag oft vernachlässigt, was dazu führt, dass sie schnell veraltet, unvollständig oder inkonsistent mit dem tatsächlichen Code ist. Dieses "technische Schuld" macht die Wartung und Weiterentwicklung zu einem Albtraum.
+Diese Faktoren – hoher manueller Aufwand und mangelhafte Dokumentation – führen unweigerlich zu langsamen Entwicklungszyklen, hohen Wartungskosten und einer geringen Agilität des gesamten Unternehmens.
 -->
 
 ---
@@ -129,16 +128,19 @@ Diese Faktoren führen unweigerlich zu langsamen Entwicklungszyklen und hohen Wa
 
 ## **Die Lösung: LLM, Kontext & Prompt**
 
-- **LLM als "Übersetzer"**: Wandelt Anforderung in Code & Doku um.<sup><a href="#ref-10">[10]</a></sup>
-- **Kontext vs. Prompt**: Eine wichtige Unterscheidung.<sup><a href="#ref-11">[11]</a></sup>
-  - **Kontext**: Die statische "DNA" des Projekts. Eine einmalige Einrichtung, die Daten-Schemata, Regeln und Ausgabeformate definiert (`Agent.md`).
-  - **User Prompt**: Die dynamische Benutzeranfrage. Ändert sich mit jeder neuen Anforderung (`user_prompt.txt`).
+- **LLM als "Übersetzer"**: Wandelt Textanforderung in Code & Doku um.<sup><a href="#ref-10">[10]</a></sup>
+- **Zwei Arten von Input**: Entscheidend für die Qualität.<sup><a href="#ref-11">[11]</a></sup>
+  - **System-Kontext (`Agent.md`)**: Statische "DNA" des Projekts (Schema, Regeln, Formate).
+  - **User-Prompt (`user_prompt.txt`)**: Dynamische, anforderungsspezifische Aufgabe.
 
 <!--
-Die Lösung liegt darin, ein LLM als intelligenten Übersetzer einzusetzen. Aber ein LLM ist kein Magier. Die Qualität des Ergebnisses hängt direkt von der Qualität des Inputs ab. Hier gilt das Prinzip: "Garbage in, garbage out."
+Die Lösung für diese Herausforderungen liegt darin, ein LLM als intelligenten Übersetzer von menschlicher Sprache zu maschinenlesbarem Code einzusetzen. Ein LLM ist jedoch kein Magier; die Qualität seines Outputs hängt direkt von der Qualität des Inputs ab. Das Prinzip "Garbage in, garbage out" gilt hier in besonderem Maße.
 
-Der Schlüssel zum Erfolg ist die Kombination aus einem stabilen Kontext (der die "Spielregeln" festlegt) und einem flexiblen Prompt (der die "Aufgabe" beschreibt).
-Nur mit diesem gebündelten Befehl kann das LLM präzise und nützliche Ergebnisse liefern.
+Der Schlüssel zum Erfolg ist daher eine saubere Trennung und Kombination von zwei Arten von Informationen:
+Erstens, der stabile **Kontext**. Ich nenne das die "DNA" des Projekts. Dies ist eine einmalige Einrichtung, die in der Datei `Agent.md` gespeichert ist. Sie enthält alle grundlegenden Informationen, die das LLM immer benötigt: die genauen Daten-Schemata, technische Regeln, Namenskonventionen und die gewünschten Ausgabeformate für Code und Dokumentation.
+Zweitens, der dynamische **User Prompt**. Dies ist die eigentliche, sich ständig ändernde Benutzeranfrage, die in der `user_prompt.txt` steht.
+
+Nur wenn wir dem LLM beides – den stabilen, reichen Kontext UND den präzisen, aufgabenspezifischen Prompt – zusammen geben, kann es zuverlässig nützliche und korrekte Ergebnisse liefern.
 -->
 
 ---
@@ -147,18 +149,18 @@ Nur mit diesem gebündelten Befehl kann das LLM präzise und nützliche Ergebnis
 
 ## **Ein neues Paradigma: Dynamische Transformationen**
 
-- **Statische ETL (Extrahieren & Laden)**: Robuste, unveränderliche Basis.
-  - _Derzeit begrenzt auf CSV-Dateien für Projektspezifikationen, um Komplexität zu reduzieren._
-- **Dynamischer "Transformieren"-Schritt**: Flexible, bei Bedarf vom LLM generierte Logik.
-- Kombiniert **Zuverlässigkeit** mit **Flexibilität**.<sup><a href="#ref-12">[12]</a></sup>
+- **Statische Basis**: `Extract` & `Load` bleiben robust und unveränderlich.
+  - _(Projekt-Fokus: CSV-Dateien zur Komplexitätsreduktion)_
+- **Dynamischer Kern**: Der `Transform`-Schritt wird flexibel.
+  - Logik wird bei Bedarf vom LLM generiert.
+- **Das Beste aus zwei Welten**: Kombiniert Zuverlässigkeit mit Flexibilität.
 
 <!--
-Dies führt uns zu einem neuen ETL-Paradigma.
-Wir behalten die statischen, robusten Teile der Pipeline bei – das Extrahieren und Laden.
-
-Warum sind diese statisch? Für dieses Projekt wurde mit spezifischen CSV-Dateien gearbeitet. Um die Lösung nicht unnötig zu verkomplizieren, wurden Extraktion und Laden auf diesen Anwendungsfall zugeschnitten.
-
-Der entscheidende Unterschied ist der "Transformieren"-Schritt. Dieser wird zu einer dynamischen Komponente, deren Logik bei Bedarf vom LLM generiert wird. Dieser Ansatz kombiniert die Zuverlässigkeit einer traditionellen Architektur mit der unglaublichen Flexibilität, die LLMs bieten.
+Dieses Vorgehen führt uns zu einem neuen, hybriden ETL-Paradigma.
+Wir erfinden das Rad nicht neu, sondern kombinieren bewährte Praktiken mit neuen Möglichkeiten.
+Die Schritte **Extrahieren** und **Laden** der Pipeline bleiben statisch und robust. Das sind die Teile, die sich selten ändern. Für dieses Projekt habe ich mich bewusst auf das Lesen und Schreiben von CSV-Dateien beschränkt, um die Komplexität zu managen und den Fokus auf den Transformationsschritt zu legen.
+Der entscheidende Unterschied ist der **Transformieren**-Schritt. Dieser wird zu einer vollständig dynamischen Komponente. Statt fest codierter Logik wird der Python-Code für die Transformation bei jeder neuen Anforderung vom LLM on-demand generiert.
+Dieser Ansatz kombiniert die Zuverlässigkeit einer traditionellen, stabilen Architektur mit der unglaublichen Flexibilität und Geschwindigkeit, die LLMs bieten.
 -->
 
 ---
@@ -167,28 +169,17 @@ Der entscheidende Unterschied ist der "Transformieren"-Schritt. Dieser wird zu e
 
 ---
 
-## **Projektübersicht: Ein LLM-gestütztes ETL-Framework**
+![bg right contain](project-architecture.png)
+
+## **Projektübersicht & Architektur**
 
 - **Ziel**: Eine ETL-Pipeline mit dynamisch generierter Transformationslogik.
-- **Technologie**: Python & pandas.
-
----
-
-```mermaid
-graph TD
-    A[Benutzer schreibt<br>user_prompt.txt] --> B{Master-Prompt<br>wird erstellt};
-    C[Agent.md<br>(Schema + Prompt-Vorlage)] --> B;
-    B --> E((LLM));
-    E --> F[dynamic_transforms.py<br>wird aktualisiert];
-    F --> G[main_pipeline.py<br>führt Transformation aus];
-    H[merged_data.csv] --> G;
-    G --> I[transformed_output.csv];
-```
+- **Technologie**: Python & die `pandas`-Bibliothek.
 
 <!--
 Kommen wir nun zur konkreten Umsetzung in meinem Projekt.
-Das Ziel war es, ein Framework zu schaffen, das genau dieses Paradigma der dynamischen Transformation implementiert.
-Die gesamte Umsetzung erfolgte in Python, wobei die `pandas`-Bibliothek das Herzstück der Datenmanipulation bildet.
+Das Ziel war es, ein Framework zu schaffen, das genau dieses Paradigma der dynamischen Transformation implementiert. Die gesamte Umsetzung erfolgte in Python, wobei die `pandas`-Bibliothek das Herzstück für alle Datenmanipulationen bildet.
+Das Diagramm zeigt den gesamten Ablauf: Der Benutzer formuliert seine Anforderung in der `user_prompt.txt`. Diese wird mit dem System-Kontext aus `Agent.md` kombiniert, um einen umfassenden Befehl für das LLM zu erstellen. Das LLM generiert daraufhin den Python-Code, der von der `main_pipeline.py` ausgeführt wird, um die Eingabedaten zu verarbeiten und das Ergebnis zu speichern.
 -->
 
 ---
@@ -200,15 +191,15 @@ Die gesamte Umsetzung erfolgte in Python, wobei die `pandas`-Bibliothek das Herz
 3.  **Skript aktualisieren** (`dynamic_transforms.py`)
 4.  **Pipeline ausführen** (`main_pipeline.py`)
 
-## ![bg right contain](4-step-process.png)
+![bg right contain](4-step-process.png)
 
 <!--
-Der daraus resultierende Workflow ist einfach und benutzerzentriert.
+Der daraus resultierende Workflow für den Anwender ist bewusst einfach und auf vier Schritte reduziert.
 
-Zuerst schreibt der Benutzer seine Anforderung in natürlicher Sprache.
-Zweitens generiert er mit einem LLM den Code.
-Drittens fügt er den generierten Code in die dafür vorgesehene Python-Datei ein.
-Und schließlich führt er das Hauptskript aus, das die gesamte Pipeline orchestriert.
+1.  **Prompt schreiben**: Der Fachanwender oder Analyst formuliert seine Anforderung in einfacher Sprache in der Datei `user_prompt.txt`.
+2.  **Code generieren**: Ein Skript (oder manueller Kopiervorgang) schickt den Prompt zusammen mit dem System-Kontext an das LLM und empfängt den generierten Python-Code.
+3.  **Skript aktualisieren**: Der generierte Code wird in die Datei `dynamic_transforms.py` eingefügt. Dieser Schritt ist ein wichtiger "Human-in-the-Loop"-Kontrollpunkt, um den Code vor der Ausführung zu überprüfen.
+4.  **Pipeline ausführen**: Der Benutzer startet die `main_pipeline.py`. Dieses Skript liest die Rohdaten, wendet die frisch generierte Transformationslogik an und speichert das Ergebnis.
 -->
 
 ---
@@ -228,11 +219,11 @@ Und schließlich führt er das Hauptskript aus, das die gesamte Pipeline orchest
 ```
 
 <!--
-Die Code-Architektur spiegelt diese Trennung von statischer und dynamischer Logik wider.
-Der `etl`-Ordner enthält die statischen Skripte.
-Im `transforms`-Ordner befindet sich die Datei für den LLM-generierten Code.
-Die `main_pipeline.py` ist der Orchestrator, der alles zusammenfügt.
-Die übrigen Textdateien bilden das Prompting-Framework, das dem LLM den notwendigen Kontext liefert.
+Die Code-Architektur spiegelt die Trennung von statischer und dynamischer Logik wider und ist auf Klarheit und Wartbarkeit ausgelegt.
+- Der `etl`-Ordner enthält die stabilen, wiederverwendbaren Skripte für das Extrahieren der Quelldaten und das Laden der Ergebnisse.
+- Im `transforms`-Ordner befindet sich die entscheidende Datei `dynamic_transforms.py`. Sie ist der Container für die vom LLM generierte Logik.
+- Die `main_pipeline.py` fungiert als zentraler Orchestrator. Sie ruft nacheinander die Extract-, Transform- und Load-Funktionen auf und steuert den gesamten Prozess.
+- Die Textdateien `Agent.md` und `user_prompt.txt` sind keine Skripte, sondern das Herz des Prompting-Frameworks. Sie liefern dem LLM den notwendigen Kontext und die spezifische Aufgabe.
 -->
 
 ---
@@ -262,51 +253,54 @@ Filtert Datensätze für 'Bioabfall FFM' über 1000 KG.
 ```
 
 <!--
-Hier sehen wir den Prozess im Überblick.
-Auf der linken Seite steht die einfache Benutzeranfrage.
-In der Mitte sehen wir den vom LLM generierten Python-Code, der diese Anfrage umsetzt.
-Und rechts die automatisch erstellte Dokumentation.
-Wenn die Pipeline läuft, wird genau dieser Code ausgeführt, um das Endergebnis zu erzeugen.
+Lassen Sie uns den Prozess an einem konkreten Beispiel durchspielen.
+1.  **Der Benutzer-Prompt**: Der Anwender möchte alle Einträge für 'Bioabfall FFM' sehen, bei denen das Gewicht über 1000 KG liegt. Er schreibt genau das in die `user_prompt.txt`.
+2.  **Der generierte Code**: Das LLM erhält diesen Prompt zusammen mit dem Schema der Datentabelle. Es versteht die Spaltennamen wie 'Gewicht' und generiert eine Python-Funktion mit `pandas`, die genau diesen Filter implementiert.
+3.  **Die generierte Dokumentation**: Gleichzeitig erstellt das LLM eine kurze, prägnante Markdown-Dokumentation, die beschreibt, was diese Transformation tut.
+
+Wenn die Pipeline als Nächstes ausgeführt wird, importiert sie die `apply_transform`-Funktion und wendet sie auf die Daten an, um das gewünschte, gefilterte Ergebnis zu erzeugen.
 -->
 
 ---
 
-## **Fazit & Limitationen**
+## **Fazit, Limitationen & Risiken**
 
-### **Wesentliche Vorteile**:
+### **Vorteile**:
 
-- Reduziert manuellen Aufwand
-- Ermöglicht Fachanwendern komplexe Transformationen
-- Garantiert synchronisierte Dokumentation
+- **Effizienz**: Reduziert manuellen Programmieraufwand.
+- **Empowerment**: Befähigt Fachanwender zu komplexen Analysen.
+- **Konsistenz**: Garantiert aktuelle und synchronisierte Dokumentation.
 
 ### **Limitationen & Risiken**:
 
-- **Korrektheit**: Generierter Code erfordert Überprüfung ("Human-in-the-Loop").<sup><a href="#ref-13">[13]</a></sup>
-- **Prompt Engineering**: Ergebnisqualität hängt stark von der Prompt-Qualität ab.<sup><a href="#ref-14">[14]</a></sup>
-- **Sicherheit**: Vorsicht beim Senden sensibler Schemainformationen an externe LLM-APIs.<sup><a href="#ref-15">[15]</a></sup>
-
----
-
-![Warnschild-Grafik mit Symbolen für Code-Bugs, Sicherheitsschlösser und inkonsistente Ergebnisse, um Risiken darzustellen.](limitations_risks.png)
+- **Korrektheit**: Code muss überprüft werden (Human-in-the-Loop).<sup><a href="#ref-13">[13]</a></sup>
+- **Prompt-Qualität**: "Garbage in, garbage out" gilt.<sup><a href="#ref-14">[11]</a></sup>
+- **Sicherheit**: Vorsicht bei sensiblen Daten-Schemata und externen APIs.<sup><a href="#ref-15">[15]</a></sup>
 
 <!--
-Zusammenfassend lässt sich sagen, dass die Vorteile auf der Hand liegen: weniger Aufwand, mehr Power für Fachexperten und immer aktuelle Dokumentation.
+Zusammenfassend liegen die Vorteile dieses Ansatzes auf der Hand: eine massive Reduktion des manuellen Aufwands, die Befähigung von Fachexperten und eine stets aktuelle Dokumentation, die mit dem Code synchronisiert ist.
 
-Es ist jedoch wichtig, auch die Limitationen zu erwähnen. Der generierte Code ist nicht immer perfekt und muss überprüft werden. Die Qualität des Ergebnisses hängt stark von der Qualität des Prompts ab. Und bei der Nutzung externer LLMs müssen Sicherheitsaspekte, insbesondere bei sensiblen Daten-Schemata, berücksichtigt werden.
+Es ist jedoch entscheidend, realistisch zu bleiben und die Limitationen und Risiken zu benennen.
+Erstens, die **Korrektheit**: Man kann sich nicht blind darauf verlassen, dass der generierte Code immer zu 100% fehlerfrei ist. Ein "Human-in-the-Loop", also ein Entwickler, der den Code kurz überprüft, ist unerlässlich, um Fehler zu vermeiden.
+Zweitens, das **Prompt Engineering**: Die Qualität des Ergebnisses hängt extrem stark von der Qualität des Prompts und des bereitgestellten Kontexts ab. Vage Anfragen führen zu vagen Ergebnissen.
+Drittens, die **Sicherheit**: Wenn man externe LLM-APIs wie die von OpenAI oder Google nutzt, sendet man potenziell sensible Informationen, wie z.B. interne Daten-Schemata. Hier sind strenge Richtlinien und eventuell der Einsatz von lokalen, selbst-gehosteten LLMs erforderlich.
 -->
 
 ---
 
 ## **Ausblick**
 
-- **Vollständige Automatisierung**: Direkter LLM-API-Aufruf in das Pipeline-Skript integrieren.
-- **Dynamisches E & L**: Den `Extract`- und `Load`-Schritt flexibler gestalten, um z.B. SQL-Datenbanken oder JSON-Dateien zu unterstützen.
-- **UI-Integration**: Eine einfache Benutzeroberfläche (z.B. mit Streamlit) für eine benutzerfreundlichere Erfahrung entwickeln.
+- **Vollständige Automatisierung**: Direkte LLM-API-Aufrufe in die Pipeline integrieren.
+- **Dynamisches E & L**: `Extract`- und `Load`-Schritte flexibler gestalten (z.B. für SQL, JSON).
+- **UI-Integration**: Eine einfache Benutzeroberfläche (z.B. mit Streamlit) entwickeln.
 
-![Abstrakte Darstellung einer KI, die Datenflüsse automatisiert, Symbol für Effizienz und Innovation.](conclusion_future.png)
+![bg right contain](conclusion_future.png)
 
 <!--
-Die nächsten Schritte wären, den Prozess vollständig zu automatisieren, die Pipeline durch dynamische Extract- und Load-Schritte für verschiedene Datenformate zu erweitern und eventuell eine einfache Benutzeroberfläche zu entwickeln, um die Bedienung noch weiter zu vereinfachen.
+Wo kann die Reise von hier aus hingehen? Es gibt mehrere spannende Richtungen.
+- **Vollständige Automatisierung**: Der nächste logische Schritt ist, den manuellen Kopiervorgang des Codes zu eliminieren. Man könnte eine LLM-API direkt in das Pipeline-Skript integrieren, sodass der Code-Generierungs- und Ausführungsprozess nahtlos in einem Schritt erfolgt.
+- **Dynamisches Extrahieren und Laden**: Aktuell sind die E- und L-Schritte auf CSV-Dateien zugeschnitten. Man könnte das LLM auch dafür nutzen, dynamisch Code zum Lesen aus SQL-Datenbanken oder zum Schreiben in verschiedene Formate wie JSON oder Parquet zu generieren.
+- **Benutzeroberfläche**: Um die Hürden für Fachanwender weiter zu senken, könnte eine einfache Web-Oberfläche, beispielsweise mit Streamlit oder Gradio, erstellt werden. Dort könnten Benutzer ihre Anfragen direkt in ein Textfeld eingeben und die Ergebnisse visualisiert bekommen.
 -->
 
 ---
@@ -315,14 +309,13 @@ Die nächsten Schritte wären, den Prozess vollständig zu automatisieren, die P
 
 # Referenzen
 
-<p id="ref-1"><b>[1]</b> <a href="https://scholar.google.com/scholar?q=traditional+ETL+challenges%2C+data+pipeline+maintenance%2C+technical+debt+data+warehousing">traditional ETL challenges, data pipeline maintenance, technical debt data warehousing</a></p>
-<p id="ref-2"><b>[2]</b> <a href="https://scholar.google.com/scholar?q=LLM+for+code+generation%2C+natural+language+to+code%2C+automatic+documentation">LLM for code generation%2C natural language to code%2C automatic documentation</a></p>
-<p id="ref-3"><b>[3]</b> <a href="https://scholar.google.com/scholar?q=data+democratization%2C+self-service+analytics%2C+agile+data+engineering">data democratization%2C self-service analytics%2C agile data engineering</a></p>
-<p id="ref-4"><b>[4]</b> <a href="https://scholar.google.com/scholar?q=ETL+fundamentals%2C+data+warehousing%2C+Ralph+Kimball%2C+Bill+Inmon">ETL fundamentals%2C data warehousing%2C Ralph Kimball%2C Bill Inmon</a></p>
-<p id="ref-5"><b>[5]</b> <a href="https://scholar.google.com/scholar?q=large+language+models+survey%2C+attention+is+all+you+need%2C+code+generation+LLM">large language models survey%2C attention is all you need%2C code generation LLM</a></p>
-<p id="ref-6"><b>[6]</b> <a href="https://scholar.google.com/scholar?q=data+democratization%2C+self-service+analytics%2C+citizen+data+scientist">data democratization%2C self-service analytics%2C citizen data scientist</a></p>
-<p id="ref-7"><b>[7]</b> <a href="https://scholar.google.com/scholar?q=agile+data+warehousing%2C+agile+ETL+development">agile data warehousing%2C agile ETL development</a></p>
-<p id="ref-8"><b>[8]</b> <a href="https://scholar.google.com/scholar?q=living+documentation%2C+documentation+as+code">living documentation%2C documentation as code</a></p>
+<p id="ref-1"><b>[1]</b> <a href="https://doi.org/10.58812/esiscs.v1i03.523">R. K. Srirangam, “The Growing Trend of Cloud-Based Data Integration and Warehousing,” Int. J. Sci. Res. Comput. Sci. Eng. Inf. Technol., vol. 10, no. 5.</a></p>
+<p id="ref-2"><b>[2]</b> <a href="https://arxiv.org/abs/2508.00083">Dong, Yihong, et al. "A survey on code generation with llm-based agents." arXiv preprint arXiv:2508.00083 (2025).</a></p>
+<p id="ref-4"><b>[4]</b> <a href="https://doi.org/10.32604/jbd.2023.046223">Khan, B., Jan, S., Khan, W., & Chughtai, M. I. (2024). An Overview of ETL Techniques, Tools, Processes and Evaluations in Data Warehousing. Journal on Big Data, 6, 1–20.</a></p>
+<p id="ref-5"><b>[5]</b> <a href="https://arxiv.org/abs/2406.00515">Jiang, Juyong, et al. "A survey on large language models for code generation." arXiv preprint arXiv:2406.00515 (2024).</a></p>
+<p id="ref-6"><b>[6]</b> <a href="https://www.researchgate.net/publication/354906721_Data_democratization_toward_a_deeper_understanding/citations">Lefebvre, Hippolyte, Christine Legner, and Martin Fadler. "Data democratization: toward a deeper understanding." ICIS. 2021.</a></p>
+<p id="ref-7"><b>[7]</b> <a href="https://books.google.de/books?id=NsucBAAAQBAJ">Hughes, Ralph. Agile data warehousing for the enterprise: a guide for solution architects and project leaders. Newnes, 2015.</a></p>
+<p id="ref-8"><b>[8]</b> <a href="https://books.google.de/books?id=KdAEb0MOQCwC">Rüping, Andreas. Agile documentation: a pattern guide to producing lightweight documents for software projects. John Wiley & Sons, 2005.</a></p>
 
 ---
 
@@ -330,13 +323,11 @@ Die nächsten Schritte wären, den Prozess vollständig zu automatisieren, die P
 
 # Referenzen (Fortsetzung)
 
-<p id="ref-9"><b>[9]</b> <a href="https://scholar.google.com/scholar?q=challenges+of+traditional+ETL%2C+ETL+technical+debt%2C+data+pipeline+maintenance+costs">challenges of traditional ETL%2C ETL technical debt%2C data pipeline maintenance costs</a></p>
-<p id="ref-10"><b>[10]</b> <a href="https://scholar.google.com/scholar?q=program+synthesis+with+large+language+models%2C+natural+language+to+code">program synthesis with large language models%2C natural language to code</a></p>
-<p id="ref-11"><b>[11]</b> <a href="https://scholar.google.com/scholar?q=prompt+engineering%2C+in-context+learning+large+language+models">prompt engineering%2C in-context+learning large language models</a></p>
-<p id="ref-12"><b>[12]</b> <a href="https://scholar.google.com/scholar?q=hybrid+data+architecture%2C+dynamic+data+pipelines%2C+configurable+etl">hybrid data architecture%2C dynamic data pipelines%2C configurable etl</a></p>
-<p id="ref-13"><b>[13]</b> <a href="https://scholar.google.com/scholar?q=correctness+of+LLM-generated+code%2C+human+in+the+loop+code+generation">correctness of LLM-generated code%2C human in the loop code generation</a></p>
-<p id="ref-14"><b>[14]</b> <a href="https://scholar.google.com/scholar?q=prompt+engineering+survey%2C+impact+of+prompt+design+on+LLM+performance">prompt engineering survey%2C impact of prompt design on LLM performance</a></p>
-<p id="ref-15"><b>[15]</b> <a href="https://scholar.google.com/scholar?q=security+and+privacy+of+large+language+models%2C+data+leakage+LLM+APIs">security and privacy of large language models%2C data leakage LLM APIs</a></p>
+<p id="ref-9"><b>[9]</b> <a href="https://www.theseus.fi/bitstream/handle/10024/853678/Tran_Trung.pdf">Tran, Trung. "In-depth Analysis and Evaluation of ETL Solutions for Big Data Processing." (2024).</a></p>
+<p id="ref-10"><b>[10]</b> <a href="https://arxiv.org/abs/2108.07732">Austin, Jacob, et al. "Program synthesis with large language models." arXiv preprint arXiv:2108.07732 (2021).</a></p>
+<p id="ref-11"><b>[11]</b> <a href="https://link.springer.com/chapter/10.1007/978-981-99-7962-2_30">Marvin, Ggaliwango, et al. "Prompt engineering in large language models." International conference on data intelligence and cognitive informatics. Singapore: Springer Nature Singapore, 2023.</a></p>
+<p id="ref-13"><b>[13]</b> <a href="https://arxiv.org/abs/2501.16857">Licorish, Sherlock A., et al. "Comparing Human and LLM Generated Code: The Jury is Still Out!." arXiv preprint arXiv:2501.16857 (2025).</a></p>
+<p id="ref-15"><b>[15]</b> <a href="https://dl.acm.org/doi/full/10.1145/3712001">Das, Badhan Chandra, M. Hadi Amini, and Yanzhao Wu. "Security and privacy challenges of large language models: A survey." ACM Computing Surveys 57.6 (2025): 1-39.</a></p>
 
 ---
 

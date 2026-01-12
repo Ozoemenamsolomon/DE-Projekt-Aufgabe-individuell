@@ -4,26 +4,27 @@ import pandas as pd
 
 def apply_transform(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Filters the DataFrame for 'Bioabfall FFM' waste type with a net weight greater than 1000 KG.
+    Filtert Datensätze auf Bioabfall FFM mit einem Nettogewicht größer als 1000 KG.
     """
-    # Filter for waste type 'Bioabfall FFM'
-    waste_type_filter = df['WASTE_TYPE_TXT'] == 'Bioabfall FFM'
-    
-    # Filter for net weight greater than 1000 KG
-    weight_filter = df['NET_WEIGHT'] > 1000
-    
-    # Apply both filters
-    transformed_df = df[waste_type_filter & weight_filter].copy()
-    
-    return transformed_df
+    filtered_df = df[
+        (df["WASTE_TYPE_TXT"] == "Bioabfall FFM") &
+        (df["NET_WEIGHT"] > 1000)
+    ].copy()
+
+    return filtered_df
+
 
 TRANSFORM_DOCUMENTATION = """
-## Bio-waste and Weight Filter Transformation
+## Filter: Bioabfall FFM mit Gewicht > 1000 KG
 
-This transformation filters the dataset to isolate specific records based on two criteria:
+Diese Transformation filtert den Datensatz nach folgenden Kriterien:
 
-1.  **Waste Type**: It selects only the records where the `WASTE_TYPE_TXT` is exactly 'Bioabfall FFM'.
-2.  **Net Weight**: It further filters these records to include only those where the `NET_WEIGHT` is greater than 1000 KG.
+- **Abfallart**: Es werden ausschließlich Einträge berücksichtigt, bei denen
+  `WASTE_TYPE_TXT` exakt den Wert **"Bioabfall FFM"** hat.
+- **Gewicht**: Zusätzlich muss das Nettogewicht (`NET_WEIGHT`) größer als **1000 KG** sein.
 
-The resulting dataset contains only high-volume collections of 'Bioabfall FFM'.
+### Ergebnis
+Der zurückgegebene DataFrame enthält nur die relevanten Datensätze, alle Spalten
+des Originaldatensatzes bleiben erhalten.
 """
+# --- End of LLM-Generated Code ---
